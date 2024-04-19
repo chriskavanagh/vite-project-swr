@@ -1,38 +1,51 @@
-import { useState, useEffect } from "react";
-import { userData } from "./utils/data.js";
-import axios from "axios";
+//import { useState, useEffect } from "react";
+//import { userData } from "./utils/data.js";
+//import axios from "axios";
 import "./App.css";
-import useSWR from "swr";
+//import useSWR from "swr";
+import Comments from "./Comments";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Comments />
+    </QueryClientProvider>
+  );
+}
+
+export default App;
+
+/* function App() {
   // swr
   //const key = "https://jsonplaceholder.typicode.com/comments";
-  //const fetcher = (key) => axios.get(key).then((res) => res.data);
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const fetcher = (url) => axios.get(url).then((res) => res.data);
+  //const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, error, isLoading } = useSWR(
     `https://jsonplaceholder.typicode.com/comments`,
     fetcher
   );
 
-  if (error) return <div>failed to load</div>;
-
-  if (isLoading) return <div>loading...</div>;
+  if (error) return <div>failed to load data</div>;
+  if (isLoading) return <div>Loading comments...</div>;
 
   return (
     <div>
-      <h2>Comments: </h2>
+      <h2 className="title">Comments</h2>
       <ol>
         {data.map((comment) => (
           <li key={comment.id} classNa>
             <strong>{comment.name}</strong>
-            <p style={{ marginBottom: "4rem" }}>{comment.body}</p>
+            <p>{comment.body}</p>
           </li>
         ))}
       </ol>
     </div>
-  );
+  ); */
 
-  /* return (
+/* return (
     <>
       <div>
         <h1>App Componment</h1>
@@ -46,7 +59,5 @@ function App() {
         </ul>
       </div>
     </>
-  ); */
-}
-
-export default App;
+  ); 
+}*/
